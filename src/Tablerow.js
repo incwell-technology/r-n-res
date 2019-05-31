@@ -1,31 +1,41 @@
 import React from "react";
 
-const Tablerow = (props) => {
-    return (
-        <tr>
-            <th scope="row">1</th>
-            <td>May 31, 2019</td>
-            <td>Chicken Pizza</td>
-            <td>600</td>
-            <td>1</td>
-            <td>600</td>
-            <td>
-                <div className="dropdown">
-                    <button className="btn btn-secondary dropdown-toggle btn-primary" type="button"
-                        id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Pending
-
-                    </button>
-                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a className="dropdown-item" href="#">Processing</a>
-                        <a className="dropdown-item" href="#">Another action</a>
-                        <a className="dropdown-item" href="#">Processed</a>
+class Tablerow extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: this.props.order.status
+        };
+        this.handleChange = this.handleChange.bind(this);
+    }
+    handleChange(event) {
+        this.setState({
+            value: event.target.value
+        });
+        //axios
+    }
+    render() {
+        return (
+            <tr>
+                <th scope="row">{this.props.order.index}</th>
+                <td>{this.props.order.date}</td>
+                <td>{this.props.order.food_item}</td>
+                <td>{this.props.order.price}</td>
+                <td>{this.props.order.quantity}</td>
+                <td>{this.props.order.net_amount}</td>
+                <td>
+                    <div class="form-group">
+                        <select value={this.state.value} onChange={this.handleChange} class="form-control">
+                            <option value="Pending">Pending</option>
+                            <option value="In-progress">In-progress</option>
+                            <option value="Ready">Ready</option>
+                            <option value="Done">Done</option>
+                        </select>
                     </div>
-                </div>
-            </td>
-        </tr>
-    );
-};
+                </td>
+            </tr>
+        );
+    }
+}
 
 export default Tablerow;

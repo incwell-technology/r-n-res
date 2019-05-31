@@ -1,7 +1,28 @@
 import React from "react";
 import TableRow from './Tablerow';
 
-const Table = (props) => {
+const Table = () => {
+    let orderList = [
+        {
+            index: 1,
+            date: "May 31, 2019",
+            food_item: "Chicken Pizza",
+            price: 600,
+            quantity: 1,
+            net_amount: 600,
+            status: "Pending"
+        },
+        {
+            index: 2,
+            date: "May 31, 2019",
+            food_item: "Ham Burger",
+            price: 100,
+            quantity: 2,
+            net_amount: 200,
+            status: "In-progress"
+        }
+    ];
+
     return (
         <table className="table">
         <thead>
@@ -16,7 +37,10 @@ const Table = (props) => {
             </tr>
         </thead>
         <tbody>
-            < TableRow / >
+            {orderList.map((order, i) =>
+                < TableRow order={order} key={i} / >
+            )}
+           
         </tbody>
     </table>
     );
