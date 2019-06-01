@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios';
 
 class Tablerow extends React.Component {
     constructor(props) {
@@ -8,16 +9,19 @@ class Tablerow extends React.Component {
         };
         this.handleChange = this.handleChange.bind(this);
     }
-    handleChange(event) {
+    handleChange(orderNum, event) {
         this.setState({
             value: event.target.value
         });
-        //axios
+        axios.post('http://localhost:8080/statusUpdate', {
+            orderNum,
+            status: event.target.value
+        })
     }
     render() {
         return (
             <tr>
-                <th scope="row">{this.props.order.index}</th>
+                <th scope="row">{this.props.order.orderNum}</th>
                 <td>{this.props.order.date}</td>
                 <td>{this.props.order.food_item}</td>
                 <td>{this.props.order.price}</td>
@@ -25,7 +29,7 @@ class Tablerow extends React.Component {
                 <td>{this.props.order.net_amount}</td>
                 <td>
                     <div className="form-group">
-                        <select value={this.state.value} onChange={this.handleChange} className="form-control">
+                        <select value={this.state.value} onChange={(e) => this.handleChange(this.props.order.orderNum, e)} className="form-control">
                             <option value="Pending">Pending</option>
                             <option value="In-progress">In-progress</option>
                             <option value="Ready">Ready</option>
