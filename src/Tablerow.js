@@ -24,8 +24,8 @@ class Tablerow extends React.Component {
                 <td>{this.props.order.quantity}</td>
                 <td>{this.props.order.net_amount}</td>
                 <td>
-                    <div class="form-group">
-                        <select value={this.state.value} onChange={this.handleChange} class="form-control">
+                    <div className="form-group">
+                        <select value={this.state.value} onChange={this.handleChange} className="form-control">
                             <option value="Pending">Pending</option>
                             <option value="In-progress">In-progress</option>
                             <option value="Ready">Ready</option>
